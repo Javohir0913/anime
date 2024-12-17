@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/registerandlogin.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+    <div id="container" class="container">
+        <!-- FORM SECTION -->
+        <div class="row">
+            <!-- SIGN UP -->
+            <div class="col align-items-center flex-col sign-up">
+                <div class="form-wrapper align-items-center">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="form sign-up">
+                            <!-- Username input -->
+                            <div class="input-group">
+                                <i class='bx bxs-user'></i>
+                                <input id="reg-username" type="text" name="reg-username" placeholder="Username" required>
+                                <span id="username-status"></span> <!-- Status uchun -->
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="input-group">
+                                <i class='bx bxs-lock-alt'></i>
+                                <input type="password" id="password" name="password1" placeholder="Password" required>
+                                <i style="float: right" class="fas fa-eye toggle-password" onclick="togglePassword('password')"></i>
+                            </div>
+
+                            <!-- Confirm Password input -->
+                            <div class="input-group">
+                                <i class='bx bxs-lock-alt'></i>
+                                <input type="password" id="confirm-password" name="password2" placeholder="Confirm password" required>
+                                <i class="fas fa-eye toggle-password" onclick="togglePassword('confirm-password')"></i>
+                            </div>
+
+                            <!-- Submit button -->
+                            <button type="submit">
+                                Sign up
+                            </button>
+
+                            <!-- Navigation to Sign In -->
+                            <p>
+                                <span>Already have an account?</span>
+                                <b onclick="toggle()" class="pointer">Sign in here</b>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <!-- END SIGN UP -->
+            <!-- SIGN IN -->
+            <div class="col align-items-center flex-col sign-in">
+                <div class="form-wrapper align-items-center">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="form sign-in">
+                            <div class="input-group">
+                                <i class='bx bxs-user'></i>
+                                <input type="text" name="username" placeholder="Username" required>
+                            </div>
+                            <div class="input-group">
+                                <i class='bx bxs-lock-alt'></i>
+                                <input type="password" name="password" placeholder="Password" required>
+                            </div>
+                            <button type="submit">
+                                Sign in
+                            </button>
+                            <p>
+                                <b>Forgot password?</b>
+                            </p>
+                            <p>
+                                <span>Don't have an account?</span>
+                                <b onclick="toggle()" class="pointer">Sign up here</b>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+                <div class="form-wrapper">
+
+                </div>
+            </div>
+            <!-- END SIGN IN -->
+        </div>
+        <!-- END FORM SECTION -->
+        <!-- CONTENT SECTION -->
+        <div class="row content-row">
+            <!-- SIGN IN CONTENT -->
+            <div class="col align-items-center flex-col">
+                <div class="text sign-in">
+                    <h2>
+                        Welcome
+                    </h2>
+
+                </div>
+                <div class="img sign-in">
+
+                </div>
+            </div>
+            <!-- END SIGN IN CONTENT -->
+            <!-- SIGN UP CONTENT -->
+            <div class="col align-items-center flex-col">
+                <div class="img sign-up">
+
+                </div>
+                <div class="text sign-up">
+                    <h2>
+                        Join with us
+                    </h2>
+
+                </div>
+            </div>
+            <!-- END SIGN UP CONTENT -->
+        </div>
+        <!-- END CONTENT SECTION -->
+    </div>
+
+
+    <script>
+        let container = document.getElementById('container')
+
+        toggle = () => {
+            container.classList.toggle('sign-in')
+            container.classList.toggle('sign-up')
+        }
+
+        setTimeout(() => {
+            container.classList.add('sign-in')
+        }, 200)
+    </script>
+
+    <script>
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = event.target;
+
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = "password";
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+    </script>
+
+    <script>
+        const usernameInput = document.getElementById('reg-username');
+    const statusElement = document.getElementById('username-status');
+
+    usernameInput.addEventListener('input', function () {
+        const username = usernameInput.value;
+
+        if (username.length >= 4) {
+            fetch(`/user/check-username/?reg-username=${username}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.is_taken) {
+                        statusElement.textContent = 'Bu username allaqachon band!';
+                        statusElement.style.color = 'red';
+                    } else {
+                        statusElement.textContent = 'Username mavjud!';
+                        statusElement.style.color = 'green';
+                    }
+                })
+                .catch(error => {
+                    statusElement.textContent = 'Xatolik yuz berdi!';
+                    statusElement.style.color = 'blue';
+                    console.error('Error:', error);
+                });
+        } else {
+            statusElement.textContent = 'Kamida 4 ta belgi kiriting.';
+            statusElement.style.color = 'orange';
+        }
+    });
+    </script>
+
+    <script>
+        // Parol va tasdiq parolining tekshiruvi
+        document.querySelector("form").addEventListener("submit", function(event) {
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirm-password").value;
+
+            // Parol uzunligi va mosligini tekshirish
+            if (password.length < 8) {
+                event.preventDefault();  // Forma yuborilishini to'xtatish
+                alert("Parol kamida 8 ta belgidan iborat bo'lishi kerak.");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                event.preventDefault();  // Forma yuborilishini to'xtatish
+                alert("Parollar mos kelmaydi!");
+                return;
+            }
+        });
+    </script>
+</body>
+</html>
