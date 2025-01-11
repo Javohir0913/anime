@@ -114,3 +114,17 @@ nav {
 body {
     padding-top: 60px; /* Navbar uchun bo'sh joy qoldirish */
 }
+
+/* Logo o'lchamini kichraytirish */
+.logo img {
+    width: 50px; /* Logoning kengligini belgilash */
+    height: auto; /* Balandlikni proporsional ravishda o'zgartirish */
+    border-radius: 50%;
+}
+
+/* Agar logoni markazlashtirishni istasangiz */
+.navbar .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
