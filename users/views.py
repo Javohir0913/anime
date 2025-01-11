@@ -18,13 +18,8 @@ def logout_view(request):
 def signup_and_login(request):
     if request.method == 'POST':
         if request.POST.get('password1'):
-            confirm_password = request.POST.get('password2')
-            password = request.POST.get('password1')
-
-            if confirm_password == password:
-                data_post = request.POST.copy()
-                data_post['username'] = data_post['reg-username']
-                form = UserCreationForm(data_post)
+            if request.POST.get('password1') == request.POST.get('password2'):
+                form = UserCreationForm(request.POST)
                 if form.is_valid():
                     form.save()
                     messages.success(request, 'Sizning hisobingiz yaratildi!')

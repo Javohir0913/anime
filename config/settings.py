@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -120,17 +120,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-# Statik fayllar
-STATIC_URL = '/static/'
+# Static fayllar
+STATIC_URL = '/static/'  # Static fayllar URL'si
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',  # Statik fayllar uchun manzil
+    BASE_DIR / "static",  # Loyiha ichidagi static papkani aniqlash
 ]
-if DEBUG is False:
-    STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # collectstatic fayllarini yig'ish uchun
 
 # Media fayllar
-MEDIA_URL = '/media/'  # Media fayllarni URL orqali ko'rish uchun
-MEDIA_ROOT = BASE_DIR / 'media'  # Media fayllarni saqlash joyi
+MEDIA_URL = '/media/'  # Media fayllar uchun URL
+MEDIA_ROOT = BASE_DIR / 'media'  # Media fayllar saqlash uchun katalog
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
