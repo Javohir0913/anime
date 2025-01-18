@@ -2,71 +2,107 @@
 {% load static %}
 
 {% block head %}
-	<link rel="stylesheet" href="{% static 'css/anime create.css' %}">
-
+    <link rel="stylesheet" href="{% static 'css/anime create.css' %}">
 {% endblock %}
+
 {% block title %}
-	Create Tag
+    Create Tag
 {% endblock %}
 
 {% block content %}
-	<div class="creat-tag">
+<div class="creat-tag">
     <div>
         <h1 style="float: left;"><a href="{% url 'anime-list' %}">Anime</a></h1>
         <h1 style="text-align: center">Insert Anime</h1>
     </div>
-        <form method="post" action="" enctype="multipart/form-data">
-            {% csrf_token %}
-            <p>
-                <label for="id_name">Name:</label>
-                <input type="text" name="name" maxlength="255" required="" id="id_name" class="form-control">
-            </p>
-            <p>
-                <label for="id_image">Image:</label>
-                <input type="file" name="image" accept="image/*" required="" id="id_image" class="form-control">
-           </p>
-            <p>
-            <label for="id_anime_tags">Anime tags:</label>
-            <select name="anime_tags" id="id_anime_tags" multiple="">
-                {% for foo in anime_tags %}
-                    <option value={{ foo.id }}>{{ foo.tag_name }}</option>
-                {% endfor %}
-            </select>
-            <div class="modal" id="tagModal">
-              <div class="modal-content">
-                <span class="close">&times;</span>
-                <h3>Select Anime Tags</h3>
-                <select id="modalTags" multiple>
-                  {% for foo in anime_tags %}
-                    <option value={{ foo.id }}>{{ foo.tag_name }}</option>
-                {% endfor %}
-                </select>
-                <button id="okBtn">OK</button>
-              </div>
-            </div>
-            </p>
+    <form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>
+            <label for="id_name">Name:</label>
+            <input type="text" name="name" maxlength="255" required="" id="id_name" class="form-control">
+        </p>
+        <p>
+            <label for="id_image">Image:</label>
+            <input type="file" name="image" accept="image/*" required="" id="id_image" class="form-control">
+        </p>
+        <p>
+            <label>Anime Tags:</label>
+            <button type="button" id="openTagModal" class="btn btn-primary">Select Tags</button>
+            <div id="selectedTags" style="margin-top: 10px; font-size: 14px; color: #555;"></div>
+            <input type="hidden" name="anime_tags" id="selectedTagsInput">
+        </p>
+        <p>
+            <label for="id_year">Year:</label>
+            <input type="number" name="year" min="0" required="" id="id_year" class="form-control">
+        </p>
+        <p>
+            <label for="id_age_rating">Age rating:</label>
+            <input type="number" name="age_rating" min="0" required="" id="id_age_rating" class="form-control">
+        </p>
+        <p>
+            <label for="id_season">Season:</label>
+            <input type="number" name="season" min="0" id="id_season" class="form-control">
+        </p>
+        <input type="submit" value="Create" class="btn btn-success mt-1 mb-3">
+    </form>
+</div>
 
-            <p>
-                <label for="id_year">Year:</label>
-                <input type="number" name="year" min="0" required="" id="id_year" class="form-control">
-            </p>
-            <p>
-                <label for="id_age_rating">Age rating:</label>
-                <input type="number" name="age_rating" min="0" required="" id="id_age_rating" class="form-control">
-            </p>
-            <p>
-                <label for="id_season">Season:</label>
-                <input type="number" name="season" min="0" id="id_season" class="form-control">
-            </p>
-            <input type="submit" value="Create" class="btn btn-success mt-1 mb-3">
-        </form>
-
+<!-- Modal -->
+<div class="modal" id="tagModal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Select Anime Tags</h3>
+        <select id="modalTags" multiple>
+            {% for foo in anime_tags %}
+                <option value="{{ foo.id }}">{{ foo.tag_name }}</option>
+            {% endfor %}
+        </select>
+        <button id="closeModal" class="btn btn-success mt-3">Close</button>
     </div>
-    {% block js %}
-    	<script>
-            $('input').addClass('form-control');
-            $('textarea').addClass('form-control');
-    </script>
+</div>
 
-    {% endblock %}
+{% endblock %}
+{% block js %}
+<script>
+    const openModal = document.getElementById('openTagModal');
+    const closeModal = document.getElementById('closeModal');
+    const modal = document.getElementById('tagModal');
+    const selectedTags = document.getElementById('selectedTags');
+    const selectedTagsInput = document.getElementById('selectedTagsInput');
+    const modalTags = document.getElementById('modalTags');
+
+    // Modalni ochish
+    openModal.addEventListener('click', () => {
+        modal.style.display = 'block';
+    });
+
+    // Modalni yopish
+    closeModal.addEventListener('click', () => {
+        modal.style.display = 'none';
+        updateSelectedTags();
+    });
+
+    // Modal oynasini yopish uchun
+    document.querySelector('.close').addEventListener('click', () => {
+        modal.style.display = 'none';
+        updateSelectedTags();
+    });
+
+    // Tanlangan teglarni yangilash
+    function updateSelectedTags() {
+        const selectedOptions = Array.from(modalTags.selectedOptions);
+        const tagNames = selectedOptions.map(option => option.textContent);
+        const tagIds = selectedOptions.map(option => option.value);
+
+        selectedTags.textContent = tagNames.join(', ');
+        selectedTagsInput.value = tagIds.join(',');
+    }
+
+    // Foydalanuvchi oynani tashqarisini bosganda yopish
+    window.addEventListener('click', (event) => {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    });
+</script>
 {% endblock %}

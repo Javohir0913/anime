@@ -17,15 +17,9 @@ class HomePageView(TemplateView):
             ip = x_forwarded_for.split(',')[0]
         else:
             ip = self.request.META.get('REMOTE_ADDR')
-        print(ip)
+
         response = requests.get(f"https://ipinfo.io/{ip}/json")
         data = response.json()
-        print({
-            "ip": data.get("ip"),
-            "city": data.get("city"),
-            "region": data.get("region"),
-            "country": data.get("country")
-        })
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
             context['user'] = User.objects.get(pk=self.request.user.pk)
@@ -33,7 +27,7 @@ class HomePageView(TemplateView):
             "ip": data.get('ip'),
             "city": data.get('city'),
             "region": data.get('region'),
-            "country": data.get('country')
+            "country": data.get('country'),
+            "coordinates": data.get('loc'),
         }
         return context
-    

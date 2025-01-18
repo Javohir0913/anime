@@ -7,6 +7,14 @@ body {
     background-size: cover; /* Rasmni to'liq qoplash */
     color: #333; /* Matn rangini to'g'irlash */
 }
+#selectedTags {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    min-height: 30px;
+    max-width: 100%;
+}
 
 .creat-tag {
     max-width: 600px;

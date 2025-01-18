@@ -7,6 +7,9 @@ from .views import (
     AnimeTagsDeleteView,
     AnimeCreateView,
     AnimeListView,
+    AnimeEditView,
+    AnimeDeleteView,
+
 )
 
 urlpatterns = [
@@ -19,4 +22,7 @@ urlpatterns = [
     # --------------------------- Anime -------------------------------------
     path('anime-create/', AnimeCreateView.as_view(), name='anime-create'),
     path('anime-list/', AnimeListView.as_view(), name='anime-list'),
+    path('anime-edit/<int:pk>/', AnimeEditView.as_view(), name='anime-edit'),
+    path('anime-delete/<int:pk>/', AnimeDeleteView.as_view(), name='anime-delete'),
+
 ]
