@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Send code
+{% endblock %}
+
+{% block content %}
+	<h1>Send code</h1>
+	<form action="" method="post">
+        {% csrf_token %}
+        <label id="email">Email</label>
+        <input name="email" value="{{ user.email }}">
+        <p>shu emailga code jo'natasizmi ?</p>
+        <input type="submit" value="Create Theme" class="btn btn-success">
+    </form>
+{% endblock %}
+
+{% block js %}
+	<script>
+        $('input').addClass('form-control');
+        $('textarea').addClass('form-control');
+    </script>
+{% endblock %}

@@ -1,0 +1,90 @@
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: url('https://thumbs.dreamstime.com/blog/2018/04/how-to-create-modern-abstract-backgrounds-24453-image37113837.jpg') no-repeat center center fixed; /* Rasmni o'rtaga joylashtirish va statik holatda tutish */
+    background-size: cover; /* Rasmni to'liq qoplash */
+    color: #333; /* Matn rangini to'g'irlash */
+}
+
+.creat-tag {
+    max-width: 600px;
+    margin: 5% auto; /* Markazga joylash */
+    background: #f9f9f9; /* Orqa fonni biroz och rangli qilish */
+    border-radius: 10px; /* Yumuq chekkalar */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soyali effekt */
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+.creat-tag h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.creat-tag form {
+    display: flex;
+    flex-direction: column; /* Elementlarni ustma-ust joylashtirish */
+}
+
+.creat-tag form input[type="submit"] {
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.creat-tag form input[type="submit"]:hover {
+    background-color: #0097a7; /* Hover effekti uchun rang */
+}
+
+.creat-tag .btn-success {
+    background-color: #28a745; /* Tugmaning yashil rangi */
+    border: none;
+    transition: 0.3s ease;
+}
+
+.creat-tag .btn-success:hover {
+    background-color: #218838; /* Hover paytida quyuqroq yashil rang */
+}
+
+/* Mobil moslashuv */
+@media screen and (max-width: 768px) {
+    .creat-tag {
+        margin: 10%;
+        padding: 15px;
+    }
+
+    .creat-tag h1 {
+        font-size: 20px;
+    }
+
+    .creat-tag form input[type="submit"] {
+        font-size: 14px;
+        padding: 8px 10px;
+    }
+}
+
+input[type="text" i] {
+    width: 100%; /* To'liq kenglikni egallaydi */
+    padding: 10px; /* Ichki bo'sh joy */
+    border: 1px solid #ccc; /* Chegaraning oddiy ko'rinishi */
+    border-radius: 5px; /* Yumuq chekkalar */
+    font-size: 16px; /* Matn o'lchami */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Animatsiya qo'shish */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Ichki soya */
+}
+
+input[type="text" i]:focus {
+    border-color: #00bcd4; /* Fokuslangan holatda chegara rangi */
+    outline: none; /* Standart fokus chizig'ini olib tashlash */
+    box-shadow: 0 0 5px rgba(0, 188, 212, 0.5); /* Fokuslangan holatda tashqi yaltirash */
+}

@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     # my apps
     'users',
+    'anime_app',
+    'homepage_app',
 ]
 
 MIDDLEWARE = [
@@ -124,6 +126,7 @@ USE_TZ = True
 STATIC_URL = '/static/'  # Static fayllar URL'si
 STATICFILES_DIRS = [
     BASE_DIR / "static",  # Loyiha ichidagi static papkani aniqlash
+    BASE_DIR / "media"
 ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'  # collectstatic fayllarini yig'ish uchun
 
@@ -149,6 +152,11 @@ EMAIL_HOST_PASSWORD = 'ofnt uudt hjor rfif'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# LOGIN_URL
+LOGIN_URL = '/user/login-and-register/'
+
+AUTH_USER_MODEL = 'users.CustomUser'
 
 # # CKEDITOR_CONFIGS
 # CKEDITOR_CONFIGS = {

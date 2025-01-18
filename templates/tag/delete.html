@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block head %}
+	<link rel="stylesheet" href="{% static 'css/tag.css' %}">
+{% endblock %}
+{% block title %}
+	Delete Tag
+{% endblock %}
+
+{% block content %}
+	<div class="creat-tag"><div>
+        <h1 style="float: left;"><a href="{% url 'anime-tags-list' %}">Tags</a></h1>
+        <h1>Delete {{ object }}</h1>
+    </div>
+        <form method="post" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Delete" class="btn btn-danger mt-1 mb-3">
+        </form>
+
+    </div>
+{% endblock %}

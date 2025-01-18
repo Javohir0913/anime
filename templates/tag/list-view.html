@@ -1,0 +1,91 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block head %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/delete.css' %}">
+{% endblock %}
+
+{% block title %}
+	Tags View
+{% endblock %}
+
+{% block content %}
+<div class="container mt-3">
+  <h2 style="margin-top: 2%"><a href="{% url 'anime-tags-create' %}">Create tags</a></h2>
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th>Tag name</th>
+        <th>edit</th>
+        <th>delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for tag in tags %}
+          <tr>
+            <td>{{ tag }}</td>
+            <td>
+            <a href="{% url 'anime-tags-edit' tag.id %}">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFGsoWfsLm4DyNoWbADAF27MinitVnelihAg&s" style="width: 50px; height: auto; border-radius: 50%;">    
+            </a>
+            </td>
+            <td>
+                <a href="{% url 'anime-tags-delete' tag.id %}">
+                    <img style="width: 50px; height: auto; border-radius: 50%;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi2VDoVHrorYdDAff-RZ-PT-DeFnx48Yihjw&s">
+{#                     <button class="button">#}
+{#                        <div class="trash">#}
+{#                            <div class="top">#}
+{#                                <div class="paper"></div>#}
+{#                            </div>#}
+{#                            <div class="box"></div>#}
+{#                            <div class="check">#}
+{#                                <svg viewBox="0 0 8 6">#}
+{#                                    <polyline points="1 3.4 2.71428571 5 7 1"></polyline>#}
+{#                                </svg>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <span>Delete Item</span>#}
+{#                    </button>#}
+                </a>
+            </td>
+          </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+    <script>
+    document.querySelectorAll('.button').forEach(button => {
+        button.addEventListener('click', e => {
+            e.preventDefault(); // `<a>` yo'naltirishini to'xtatish
+            const link = button.closest('a').href; // Yo'naltirish URL
+            if (!button.classList.contains('delete')) {
+                button.classList.add('delete');
+
+                // URL orqali DELETE so'rov yuborish
+                fetch(link, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}', // CSRF tokenni qo'shish
+                    },
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Muvaffaqiyatli o'chirildi, sahifani yangilash
+                        window.location.href = "{% url 'anime-tags-list' %}";
+                    } else {
+                        alert('Oʻchirishda xatolik yuz berdi.');
+                    }
+                })
+                .catch(() => {
+                    alert('Server bilan aloqa qilishda xatolik yuz berdi.');
+                });
+            }
+        });
+    });
+</script>
+
+{% endblock %}
+
