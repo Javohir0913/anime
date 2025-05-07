@@ -1,11 +1,14 @@
 from random import randint
 
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.mail import send_mail
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout, get_user_model, update_session_auth_hash
 from django.contrib import messages
 from django.http import JsonResponse
 from django.contrib.auth.forms import PasswordChangeForm
+from django.views.generic import DetailView, UpdateView
 
 from .forms import RegistrationForm
 from .models import CustomUser
@@ -18,9 +21,7 @@ def logout_view(request):
     if request.user.is_authenticated:
         logout(request)
         messages.success(request, 'Siz muvaffaqiyatli chiqdingiz!')
-        return redirect('login-register')  # Chiqishdan so'ng login sahifasiga yo'naltirish
-    else:
-        return redirect('login-register')
+    return redirect('login-register')
 
 
 def signup_and_login(request):
@@ -36,6 +37,7 @@ def signup_and_login(request):
                     return redirect('home_page')  # Yangi hisob yaratildi, login sahifasiga yo'naltirish
                 else:
                     messages.error(request, 'Ro‘yxatdan o‘tishda xatolik yuz berdi!')
+                    return redirect('login-register')
             else:
                 messages.error(request, 'Parollar mos kelmaydi!')
 
@@ -65,6 +67,25 @@ def check_username(request):
         is_taken = User.objects.filter(username=username).exists()
         return JsonResponse({'is_taken': is_taken})
     return JsonResponse({'error': 'Username kiritilmadi!'}, status=400)
+
+
+class UserProfileView(DetailView, LoginRequiredMixin):
+    model = User
+    template_name = 'registration/user_profile.html'
+    context_object_name = 'user_profile'
+
+    def get_object(self, *args, **kwargs):
+        return get_object_or_404(User, pk=self.request.user.pk)
+
+
+class UserUpdateView(LoginRequiredMixin, UpdateView):
+    model = User
+    template_name = 'registration/update_profile.html'
+    fields = ['username', 'email', 'first_name', 'user_icon']
+    success_url = reverse_lazy('profile')
+
+    def get_object(self, *args, **kwargs):
+        return get_object_or_404(User, pk=self.request.user.pk)
 
 
 # ----------------- url va template qilinmagan -----------------

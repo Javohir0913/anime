@@ -1,28 +1,100 @@
 {% extends 'index.html' %}
+{% load static %}
+{% block head %}
+	<link rel="stylesheet" href="{% static 'css/base.css' %}">
+{% endblock %}
+
 {% block title %}
 	bosh sahifa test
 {% endblock %}
 
 {% block content %}
-    <div class="test">
-	    <h1>qwerty</h1>
-    <h3>IP: {{ info.ip }}</h3>
-<h3>Shahar: {{ info.city }}</h3>
-<h3>Viloyat: {{ info.region }}</h3>
-<h3>Davlat: {{ info.country }}</h3>
-{#{% if info.coordinates %}#}
-{#    <h3>Joylashuv: {{ info.coordinates }}</h3>#}
-{#    <iframe#}
-{#        src="https://www.google.com/maps?q={{ info.coordinates }}&z=15&output=embed"#}
-{#        width="600"#}
-{#        height="450"#}
-{#        style="border:0;"#}
-{#        allowfullscreen=""#}
-{#        loading="lazy">#}
-{#    </iframe>#}
-{#{% else %}#}
-{#    <p>Joylashuv aniqlanmadi.</p>#}
-{#{% endif %}#}
-
+<main>
+    <div class="header__search">
+        <form id="quicksearch" method="post">
+            <input type="hidden" name="do" value="search">
+            <input type="hidden" name="subaction" value="search">
+            <div class="header__search-box">
+                <input id="story" name="story" placeholder="Поиск аниме" type="text" autocomplete="off" maxlength="25" minlength="3">
+                <button type="submit" class="search-btn">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </form>
     </div>
+    <div class="sect">
+    <h2 class="sect__header sect__title">Новые серии аниме</h2>
+    <div class="anime-container row">
+        {% for anime in page_obj %}
+        <div class="col-12 col-sm-6">
+            <a href="{% url 'anime_view' anime.anime_info.id anime.anime_info.english_name|slugify %}">
+                <div class="anime-item">
+                    <img src="{% static anime.anime_info.image %}" alt="Anime Poster">
+                    <div class="anime-info">
+                        <h3>{{ anime.anime_info.name }}</h3>
+                        <p>{{ anime.created_at|date:"d-m-Y, H:i" }}</p>
+                    </div>
+                    <div class="anime-episode">
+                        <span>{{ anime.part }}</span>
+                        <small>серия</small>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+        <div class="pagination">
+            <nav>
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo; Oldingi</a>
+                    </li>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                            <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                            <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Keyingi &raquo;</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+        {#  Сегодня выйдет  #}
+    <div class="sect">
+    <h2 class="sect__header sect__title">Сегодня выйдет</h2>
+        <div class="anime-container row">
+            {% if week_animes %}
+                {% for anime in week_animes %}
+                <div class="col-12 col-sm-6">
+                    <div class="anime-item">
+                        <img src="{% static anime.anime_info.image %}" alt="Anime Poster">
+                        <div class="anime-info">
+                            <h3>{{ anime.anime_info.name }}</h3>
+                            <p>Новая серия в  {{ anime.time|date:"H:i" }}
+</p>
+                        </div>
+                        <div class="anime-episode">
+                            <span>{{ anime.part }}</span>
+                            <small>серия</small>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <h1>ничего не найдено</h1>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+</main>
 {% endblock %}

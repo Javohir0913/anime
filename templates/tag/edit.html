@@ -9,9 +9,10 @@
 {% endblock %}
 
 {% block content %}
+<main>
 	<div class="creat-tag">
     <div>
-        <h1 style="float: left;"><a href="{% url 'anime-tags-list' %}">Tags</a></h1>
+        <span><a href="{% url 'anime-tags-list' %}">Tags</a></span>
         <h1>Edit Tag</h1>
     </div>
         <form method="post" action="" enctype="multipart/form-data">
@@ -21,4 +22,5 @@
         </form>
 
     </div>
+</main>
 {% endblock %}

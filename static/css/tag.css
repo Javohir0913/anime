@@ -1,26 +1,33 @@
 body {
     font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background: url('https://thumbs.dreamstime.com/blog/2018/04/how-to-create-modern-abstract-backgrounds-24453-image37113837.jpg') no-repeat center center fixed; /* Rasmni o'rtaga joylashtirish va statik holatda tutish */
-    background-size: cover; /* Rasmni to'liq qoplash */
-    color: #333; /* Matn rangini to'g'irlash */
+    background: linear-gradient(to right, #bd748e, #4159a5);
 }
 
 .creat-tag {
     max-width: 600px;
     margin: 5% auto; /* Markazga joylash */
-    background: #f9f9f9; /* Orqa fonni biroz och rangli qilish */
+    background: linear-gradient(to right, #7496bd, #3c383c);
     border-radius: 10px; /* Yumuq chekkalar */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soyali effekt */
     padding: 20px;
     font-family: 'Arial', sans-serif;
+    justify-content: center;
+    align-items: center;
+}
+
+.creat-tag input {
+    background-color: #203349;
+    color: white;
+}
+.creat-tag a {
+    text-decoration: none;
+    color: #dc2626;
+    font-size: 23px;
 }
 
 .creat-tag h1 {
     text-align: center;
-    color: #333;
+    color: #ffffff;
     margin-bottom: 20px;
     font-size: 24px;
 }

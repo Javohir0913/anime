@@ -338,12 +338,17 @@ html {
 }
 
 body {
-    min-height: 100vh;
-    display: flex;
     font-family: "Inter", Arial;
-    justify-content: center;
-    align-items: center;
-    background: #000;
+    background: linear-gradient(to right, #bd748e, #4159a5);
+}
+
+a {
+    text-decoration: none;
+}
+
+#link_tags {
+    text-decoration: none;
+    color: rgb(0 255 46);
 }
 
 
@@ -408,4 +413,61 @@ body {
     color: white;
     font-family: "Rubik", sans-serif;
     transition: color 600ms;
+}
+
+/* Mobil qurilmalar uchun moslashuv */
+@media (max-width: 768px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap; /* Matnni o‘ralishini oldini oladi */
+    }
+
+    th, td {
+        font-size: 14px; /* Mobil uchun kichikroq shrift */
+    }
+
+    .button {
+        padding: 8px 16px;
+        min-width: 120px;
+        font-size: 12px;
+    }
+
+    .button span {
+        font-size: 12px;
+        line-height: 22px;
+    }
+
+    .button .trash {
+        left: -5px;
+        transform: scale(0.6);
+    }
+
+    .meta-link {
+        padding: 8px 16px;
+        left: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .button {
+        padding: 6px 12px;
+        min-width: 100px;
+        font-size: 10px;
+    }
+
+    .button span {
+        font-size: 10px;
+        line-height: 20px;
+    }
+
+    .button .trash {
+        left: -3px;
+        transform: scale(0.5);
+    }
+
+    .meta-link {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
 }

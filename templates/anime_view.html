@@ -1,0 +1,40 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block head %}
+	<link rel="stylesheet" href="{% static 'css/video_player.css' %}">
+{% endblock %}
+
+{% block title %}
+    Video player
+{% endblock %}
+
+{% block content %}
+<main class="player-container">
+    <h2 class="player-title">Anime Iframe Player</h2>
+
+    <iframe
+        id="iframe-player"
+        class="player-iframe"
+        src="{{ episode_list.0.url_video }}"
+        allowfullscreen
+        loading="lazy"
+    ></iframe>
+
+    <div class="episode-buttons">
+        {% for ep in episode_list %}
+            <button class="episode-btn" onclick="changeIframe('{{ ep.url_video }}')">
+                {{ ep.part }}-qism
+            </button>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}
+
+{% block js %}
+<script>
+function changeIframe(url) {
+    document.getElementById("iframe-player").src = url;
+}
+</script>
+{% endblock %}

@@ -1,0 +1,68 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #bd748e, #4159a5);
+}
+
+.profile-container {
+    position: fixed; /* Harakatlanmaydigan qilib qo‘yish */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 0; /* Body foni ko‘rinadigan bo‘lishi uchun */
+    opacity: 0.9; /* Tushunarli bo‘lishi uchun shaffoflik qo‘shish */
+}
+
+.profile-card {
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 400px;
+    background: linear-gradient(to right, #7496bd, #3c383c);
+    z-index: 1; /* Profil kartasi fonning oldida turishi uchun */
+}
+
+.profile-image img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #007bff;
+}
+
+.profile-card h2 {
+    margin: 15px 0 10px;
+    font-size: 22px;
+    color: #ffffff;
+}
+
+.profile-card p {
+    font-size: 16px;
+    color: #ffffff;
+    margin: 5px 0;
+}
+
+.profile-card i {
+    color: #007bff;
+    margin-right: 8px;
+}
+
+.edit-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.edit-button:hover {
+    background-color: #0056b3;
+}
+

@@ -3,22 +3,22 @@
 
 {% block head %}
 	<link rel="stylesheet" href="{% static 'css/tag.css' %}">
+    <link rel="stylesheet" href="{% static 'css/episode.css' %}">
 {% endblock %}
 {% block title %}
 	Delete Tag
 {% endblock %}
 
 {% block content %}
-    <main>
 	<div class="creat-tag"><div>
-        <span><a href="{% url 'anime-tags-list' %}">Tags</a></span>
-        <h1>Delete {{ object }}</h1>
+        <h1 style="float: left;"><a href="{% url 'episode-list' %}">Episodes</a></h1>
+        <h1>Delete '{{ episode.anime_info }}' {{ episode.part }} part</h1>
     </div>
         <form method="post" action="" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Delete" class="btn btn-danger mt-1 mb-3">
         </form>
+
     </div>
-    </main>
 {% endblock %}

@@ -2,17 +2,19 @@
 {% load static %}
 
 {% block head %}
-	<link rel="stylesheet" href="{% static 'css/tag.css' %}">
-{% endblock %}
-{% block title %}
-	Create Tag
+    <link rel="stylesheet" href="{% static 'css/anime create.css' %}">
+    <link rel="stylesheet" href="{% static 'css/episode.css' %}">
+    
 {% endblock %}
 
+{% block title %}
+    Create Tag
+{% endblock %}
 {% block content %}
     <main>
 	<div class="creat-tag">
     <div>
-        <span><a href="{% url 'anime-tags-list' %}">Tags</a></span>
+        <span><a href="{% url 'episode-list' %}">Episodes</a></span>
         <h1>Insert Tag</h1>
     </div>
         <form method="post" action="" enctype="multipart/form-data">

@@ -1,0 +1,93 @@
+/* Umumiy sozlamalar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #bd748e, #4159a5);
+}
+
+/* Profilni yangilash konteyneri */
+.profile-update-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Profilni yangilash kartochkasi */
+.profile-update-card {
+    background: linear-gradient(to right, #7496bd, #3c383c);
+    padding: 10px 30px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+}
+
+/* H2 sarlavha */
+.profile-update-card h2 {
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+/* Forma ichidagi inputlar */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group a {
+    text-decoration: none;
+    color: rgb(104 221 78);
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    background-color: blueviolet;
+    color: white;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Tugmalar */
+.btn-save, .btn-back {
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+.btn-save {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-save:hover {
+    background-color: #0056b3;
+}
+
+.btn-back {
+    background-color: #ccc;
+    color: black;
+}
+
+.btn-back:hover {
+    background-color: #aaa;
+}

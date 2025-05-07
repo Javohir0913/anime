@@ -9,6 +9,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const themeToggle = document.getElementById("theme-toggle");
+    const icon = themeToggle.querySelector("i");
+    const body = document.body;
+
+    if (localStorage.getItem("theme") === "dark") {
+        body.classList.add("dark-mode");
+        icon.classList.replace("bi-moon-fill", "bi-sun-fill"); // Quyosh belgisi
+    }
+
+    themeToggle.addEventListener("click", function () {
+        body.classList.toggle("dark-mode");
+
+        if (body.classList.contains("dark-mode")) {
+            icon.classList.replace("bi-moon-fill", "bi-sun-fill"); // Quyosh rejimi
+            localStorage.setItem("theme", "dark");
+        } else {
+            icon.classList.replace("bi-sun-fill", "bi-moon-fill"); // Kechki rejim
+            localStorage.setItem("theme", "light");
+        }
+    });
+});
+
+
 // <script>
 //     function togglePassword(inputId) {
 //     const input = document.getElementById(inputId);

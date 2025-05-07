@@ -1,0 +1,183 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+.header__search {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    width: 100vw; /* To‘liq ekran bo‘ylab egallaydi */
+    padding: 0;
+}
+
+.header__search-box {
+    display: flex;
+    align-items: center;
+    background-color: #0c1922;
+    border-radius: 25px;
+    padding: 5px; /* Ichki bo‘shliq */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    width: 100%; /* 100% qilib qo‘yish */
+    height: 40px;
+    box-sizing: border-box; /* Padding ta’sir qilmasligi uchun */
+}
+
+.header__search-box input {
+    color: white;
+    background-color: #0c1922;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    flex: 1;
+    min-width: 0;
+    padding-right: 100px;
+    margin: 10px;
+    height: 100%;
+}
+
+.search-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 10px;
+}
+
+.search-btn:hover {
+    color: #00bcd4;
+}
+.anime-container {
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.anime-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #0c1922;
+    border-radius: 12px;
+    padding: 10px 15px;
+    margin: 10px 5px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    color: white;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.anime-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.anime-item img {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.anime-info {
+    flex-grow: 1;
+}
+
+.anime-info h3 {
+    font-size: 16px;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.anime-info p {
+    font-size: 13px;
+    color: #ccc;
+    margin: 5px 0 0;
+}
+
+.anime-episode {
+    text-align: right;
+    font-size: 20px;
+    font-weight: bold;
+    color: #00bcd4;
+}
+
+.anime-episode small {
+    display: block;
+    font-size: 12px;
+    color: #ccc;
+}
+
+
+.sect h2 {
+    font-size: 16px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.col-12 {
+    margin: auto;
+}
+
+/* Paginatsiya container */
+.pagination {
+    display: block;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.pagination ul {
+    list-style: none;
+    padding: 0;
+    display: inline-flex;
+    background-color: #0c1922;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* Har bir sahifa tugmasi */
+.page-item {
+    margin: 0;
+}
+
+/* Linklar */
+.page-link {
+    display: block;
+    padding: 10px 15px;
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #0c1922;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: 500;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.page-link:hover {
+    background-color: #00bcd4;
+    color: #0c1922;
+}
+
+/* Oxirgi item (border yo‘q) */
+.page-item:last-child .page-link {
+    border-right: none;
+}
+
+/* Faol sahifa (active) */
+.page-item.active .page-link {
+    background-color: #00bcd4;
+    color: #0c1922;
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+}

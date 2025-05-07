@@ -6,13 +6,70 @@
 }
 .menu-item-5 img {
     width: 50px;
-    height: auto;
+    height: 50px;
     border-radius: 50%;
 }
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Logotip va tugma orasidagi masofa */
+}
+
+/* Tema almashtirish tugmasi */
+.theme-btn {
+    background: none;
+    /*border: none;*/
+    border-radius: 10px;
+    width: 40px;
+    cursor: pointer;
+    font-size: 24px;
+    color: white;
+    transition: color 0.3s;
+    margin-left: 10px; /* Logotipga yaqinlashtirish */
+}
+
+.theme-btn:hover {
+    color: #fdd835; /* Sariq rang */
+}
+
+/* Dark mode */
+.dark-mode {
+    background: #1b2935;
+    color: white;
+}
+
+.dark-mode header {
+    background: #1e1e1e;
+}
+
+.dark-mode .nav-links a {
+    color: #ddd;
+}
+
+.dark-mode .nav-links a:hover {
+    color: #00bcd4;
+}
+
+.dark-mode .sticky-footer {
+    background: #1e1e1e;
+}
+
+main {
+    flex: 1; /* Asosiy bo'lim footer yuqorida qolishi uchun */
+    width: 100%;
+}
+
 body {
+    display: flex;
+    justify-content: center; /* Gorizontal markazlash */
+    align-items: center; /* Vertikal markazlash */
+    min-height: 100vh; /* To'liq ekran balandligi */
+    margin: 0;
+    flex-direction: column; /* Kontent ustun shaklida joylashadi */
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
-    padding-top: 60px;
+    padding-top: 95px;
 }
 
 /* Header Styles */
@@ -28,7 +85,6 @@ header {
 }
 
 .navbar {
-    max-width: 1200px;
     margin: auto;
     display: flex;
     justify-content: space-between;
@@ -38,6 +94,12 @@ header {
 
 .logo img {
     width: 50px;
+    height: auto;
+    border-radius: 50%;
+}
+
+.user-icon {
+   width: 100px;
     height: auto;
     border-radius: 50%;
 }
@@ -136,7 +198,12 @@ header {
     }
 }
 
-.test {
-    margin-top: 2%;
+/* Sticky footer */
+.sticky-footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    width: 100%;
 }
 

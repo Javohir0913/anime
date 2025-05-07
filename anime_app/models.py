@@ -26,15 +26,17 @@ class AnimeTags(models.Model):
 class Anime(models.Model):
 
     name = models.CharField(max_length=255)
+    english_name = models.CharField(max_length=255, blank=True, null=True)
     image = models.ImageField(upload_to='anime_images')
-    anime_tags = models.ManyToManyField(AnimeTags, blank=True, related_name='anime_tags')
+    anime_tags = models.ManyToManyField(AnimeTags, related_name='anime_tags')
     year = models.PositiveSmallIntegerField()
     age_rating = models.PositiveSmallIntegerField()
     season = models.PositiveSmallIntegerField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    last_part = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.name} {self.year} {self.anime_tags}"
+        return f"{self.name} {self.season} season"
 
     class Meta:
         ordering = ['name']
@@ -56,13 +58,40 @@ class Episode(BaseModel):
     studio = models.CharField(max_length=255, blank=True, null=True)
     quality = models.CharField(max_length=100, choices=RoleChoice.choices, default=RoleChoice.quality_240)
     part = models.IntegerField()
-    anime_info = models.ForeignKey('Anime', related_name='episodes', on_delete=models.CASCADE)
+    anime_info = models.ForeignKey(Anime, related_name='episodes', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.part} {self.title} {self.quality}"
+        return f"{self.anime_info} {self.part}-part {self.quality}p"
 
     class Meta:
         ordering = ['title']
         verbose_name = 'anime'
         verbose_name_plural = 'Episodes'
         unique_together = (('title', 'url_video'),)
+
+
+class WeekAnime(BaseModel):
+    class RoleChoice(models.TextChoices):
+        monday = 'monday', 'Monday'
+        tuesday = 'tuesday', 'Tuesday'
+        wednesday = 'wednesday', 'Wednesday'
+        thursday = 'thursday', 'Thursday'
+        friday = 'friday', 'Friday'
+        saturday = 'saturday', 'Saturday'
+        sunday = 'sunday', 'Sunday'
+
+    anime_info = models.ForeignKey(Anime, related_name='weeks', on_delete=models.CASCADE)
+    day = models.CharField(max_length=100, choices=RoleChoice.choices, default=RoleChoice.monday)
+    stable = models.BooleanField(default=True)
+    time = models.TimeField(help_text="Masalan: 15:30 ko‘rinishida vaqt kiriting")
+
+    def __str__(self):
+        return f"{self.anime_info} - {self.day} - {self.time.strftime('%H:%M')}"
+
+    class Meta:
+        ordering = ['day', 'time']
+        verbose_name = 'week'
+        verbose_name_plural = 'Weeks'
+        unique_together = (('anime_info', 'day'),)
+
